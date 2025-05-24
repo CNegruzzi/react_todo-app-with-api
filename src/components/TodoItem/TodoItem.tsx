@@ -75,11 +75,11 @@ export const TodoItem: React.FC<Props> = ({
         await onDelete(id);
       } else {
         await onUpdate({ ...todo, title: trimmedTitle });
+        setIsTodoEditing(false);
       }
-
-      setIsTodoEditing(false);
-    } catch {
+    } catch (error) {
       setEditedTitle(title);
+      throw error;
     } finally {
       setLoading(false);
     }
